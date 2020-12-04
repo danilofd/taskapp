@@ -1,0 +1,51 @@
+<mat-card>
+
+    <form class="form" [formGroup]="form">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Schedule Date</mat-label>
+                <input matInput [matDatepicker]="scheduleTask" formControlName="scheduleTaskDate">
+                <mat-datepicker-toggle matSuffix [for]="scheduleTask"></mat-datepicker-toggle>
+                <mat-datepicker #scheduleTask></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Date Finish</mat-label>
+                <input matInput [matDatepicker]="dateFinish" formControlName="dateFinish">
+                <mat-datepicker-toggle matSuffix [for]="dateFinish"></mat-datepicker-toggle>
+                <mat-datepicker #dateFinish></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-label>Time Spend</mat-label>
+            <div>
+                <mat-form-field style="width: 40px;">
+                    <input matInput type="number" placeholder="Hour" min="0" formControlName="timeSpendHour">
+                </mat-form-field>
+                :
+                <mat-form-field style="width: 40px;">
+                    <input matInput type="number" placeholder="Minutes" min="0" max="59" formControlName="timeSpendMinute">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea matInput #message maxlength="256" name="description" formControlName="description"></textarea>
+                <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" type="button" (click)="save()">Save</button>
+            &nbsp;
+            <button mat-raised-button color="warn" routerLink="/">Cancel</button>
+        </div>
+    </form>
+
+
+</mat-card>

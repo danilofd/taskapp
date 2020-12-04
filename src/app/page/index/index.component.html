@@ -1,0 +1,58 @@
+
+    <mat-card>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="tasks">
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> Id </th>
+                    <td mat-cell *matCellDef="let task"> {{task.id}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef> Description </th>
+                    <td mat-cell *matCellDef="let task"> {{task.description}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="scheduleTaskDate">
+                    <th mat-header-cell *matHeaderCellDef> Task Date </th>
+                    <td mat-cell *matCellDef="let task"> {{task.scheduleTaskDate | date}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="dateFinish">
+                    <th mat-header-cell *matHeaderCellDef> Date Finish </th>
+                    <td mat-cell *matCellDef="let task"> {{task.dateFinish | date}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="timeSpend">
+                    <th mat-header-cell *matHeaderCellDef> Time Spend </th>
+                    <td mat-cell *matCellDef="let task"> {{task.timeSpend}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="buttons" >
+                    <th mat-header-cell *matHeaderCellDef style="width: 100px;"> 
+                        <button mat-raised-button color="primary" routerLink="/new">New Task</button>   
+                    </th>
+                    <td mat-cell *matCellDef="let task"> 
+                        <button mat-icon-button color="primary" aria-label="Edit" [routerLink]="['/new', task.id]" [disabled]="task.dateFinish">
+                            <mat-icon aria-hidden="false">edit</mat-icon>
+                          </button>
+                          &nbsp;
+                          <button mat-icon-button color="warn" aria-label="Cancel" [disabled]="task.dateFinish">
+                            <mat-icon aria-hidden="false">delete</mat-icon>
+                          </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[1, 5, 10, 20]" [pageSize]="page.size" [length]="page.totalElements" (page)="nextPage($event)" showFirstLastButtons></mat-paginator>
+        </div>
+
+    </mat-card>
